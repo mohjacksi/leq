@@ -2,26 +2,25 @@
 
 namespace App\Http\Requests;
 
-use App\Models\RejaBeshdarboyan;
+use App\Models\Time;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
 
-class UpdateRejaBeshdarboyanRequest extends FormRequest
+class StoreTimeRequest extends FormRequest
 {
     public function authorize()
     {
-        return Gate::allows('reja_beshdarboyan_edit');
+        return Gate::allows('time_create');
     }
 
     public function rules()
     {
         return [
-            'jimara_beshdarboyan' => [
+            'time' => [
+                'string',
                 'required',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647',
+                'unique:times',
             ],
         ];
     }

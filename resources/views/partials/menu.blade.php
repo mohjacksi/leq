@@ -154,6 +154,16 @@
                             </a>
                         </li>
                     @endcan
+                    @can('time_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.times.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/times") || request()->is("admin/times/*") ? "c-active" : "" }}">
+                                <i class="fa-fw far fa-clock c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.time.title') }}
+                            </a>
+                        </li>
+                    @endcan
                 </ul>
             </li>
         @endcan
@@ -166,7 +176,7 @@
                     {{ trans('cruds.daxlkrnaDengan.title') }}
                 </a>
                 <ul class="c-sidebar-nav-dropdown-items">
-                    @can('dengen_layenetsiyasi_access')
+                    @can('dengen_layenetsiyasi_access!!')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.dengen-layenetsiyasis.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/dengen-layenetsiyasis") || request()->is("admin/dengen-layenetsiyasis/*") ? "c-active" : "" }}">
                                 <i class="fa-fw far fa-flag c-sidebar-nav-icon">
@@ -283,7 +293,7 @@
                 </a>
             </li>
         @endcan
-        @can('derencamen_rejabeshdarboyan_access!!!')
+        @can('derencamen_rejabeshdarboyan_access')
             <li class="c-sidebar-nav-item">
                 <a href="{{ route("admin.derencamen-rejabeshdarboyans.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/derencamen-rejabeshdarboyans") || request()->is("admin/derencamen-rejabeshdarboyans/*") ? "c-active" : "" }}">
                     <i class="fa-fw fas fa-walking c-sidebar-nav-icon">
@@ -294,7 +304,7 @@
             </li>
         @endcan
         @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
-            @can('profile_password_edit!!!')
+            @can('profile_password_edit')
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->is('profile/password') || request()->is('profile/password/*') ? 'c-active' : '' }}" href="{{ route('profile.password.edit') }}">
                         <i class="fa-fw fas fa-key c-sidebar-nav-icon">

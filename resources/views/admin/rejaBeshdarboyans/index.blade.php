@@ -3,18 +3,18 @@
 @can('reja_beshdarboyan_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-primary btn-lg btn-block" href="{{ route('admin.reja-beshdarboyans.create') }}">
+            <a class="btn btn-success" href="{{ route('admin.reja-beshdarboyans.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.rejaBeshdarboyan.title_singular') }}
             </a>
         </div>
     </div>
 @endcan
-<div class="card border-primary">
+<div class="card">
     <div class="card-header">
         {{ trans('cruds.rejaBeshdarboyan.title_singular') }} {{ trans('global.list') }}
     </div>
 
-    <div class="card-body text-info">
+    <div class="card-body">
         <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-RejaBeshdarboyan">
             <thead>
                 <tr>
@@ -38,6 +38,9 @@
                     </th>
                     <th>
                         {{ trans('cruds.rejaBeshdarboyan.fields.jimara_beshdarboyan') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.rejaBeshdarboyan.fields.time') }}
                     </th>
                     <th>
                         &nbsp;
@@ -77,6 +80,14 @@
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($times as $key => $item)
+                                <option value="{{ $item->time }}">{{ $item->time }}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
                     </td>
@@ -139,6 +150,7 @@
 { data: 'bingeh_name', name: 'bingeh.name' },
 { data: 'demjimer', name: 'demjimer' },
 { data: 'jimara_beshdarboyan', name: 'jimara_beshdarboyan' },
+{ data: 'time_time', name: 'time.time' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

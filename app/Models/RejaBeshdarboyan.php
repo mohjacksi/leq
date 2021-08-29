@@ -5,11 +5,9 @@ namespace App\Models;
 use \DateTimeInterface;
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RejaBeshdarboyan extends Model
 {
-    use SoftDeletes;
     use Auditable;
 
     public $table = 'reja_beshdarboyans';
@@ -26,6 +24,7 @@ class RejaBeshdarboyan extends Model
         'bingeh_id',
         'demjimer',
         'jimara_beshdarboyan',
+        'time_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -44,6 +43,11 @@ class RejaBeshdarboyan extends Model
     public function bingeh()
     {
         return $this->belongsTo(Bingeh::class, 'bingeh_id');
+    }
+
+    public function time()
+    {
+        return $this->belongsTo(Time::class, 'time_id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

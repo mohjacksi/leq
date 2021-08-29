@@ -1,58 +1,46 @@
 @extends('layouts.admin')
 @section('content')
-@can('dengen_layenetsiyasi_create')
+@can('reja_beshdarboyan_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-primary btn-lg btn-block" href="{{ route('admin.dengen-layenetsiyasis.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.dengenLayenetsiyasi.title_singular') }}
+            <a class="btn btn-success" href="{{ route('admin.reja-beshdarboyans.create') }}">
+                {{ trans('global.add') }} {{ trans('cruds.rejaBeshdarboyan.title_singular') }}
             </a>
         </div>
     </div>
 @endcan
-<div class="card border-primary">
+<div class="card">
     <div class="card-header">
-        {{ trans('cruds.dengenLayenetsiyasi.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.rejaBeshdarboyan.title_singular') }} {{ trans('global.list') }}
     </div>
 
-    <div class="card-body text-info">
-        <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-DengenLayenetsiyasi">
+    <div class="card-body">
+        <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-RejaBeshdarboyan">
             <thead>
                 <tr>
                     <th width="10">
 
                     </th>
                     <th>
-                        {{ trans('cruds.dengenLayenetsiyasi.fields.id') }}
+                        {{ trans('cruds.rejaBeshdarboyan.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.dengenLayenetsiyasi.fields.leq') }}
+                        {{ trans('cruds.rejaBeshdarboyan.fields.leq') }}
                     </th>
                     <th>
-                        {{ trans('cruds.dengenLayenetsiyasi.fields.lijna') }}
+                        {{ trans('cruds.rejaBeshdarboyan.fields.lijna') }}
                     </th>
                     <th>
-                        {{ trans('cruds.dengenLayenetsiyasi.fields.bingeh') }}
+                        {{ trans('cruds.rejaBeshdarboyan.fields.bingeh') }}
                     </th>
                     <th>
-                        {{ trans('cruds.dengenLayenetsiyasi.fields.westgeh') }}
+                        {{ trans('cruds.rejaBeshdarboyan.fields.demjimer') }}
                     </th>
                     <th>
-                        {{ trans('cruds.dengenLayenetsiyasi.fields.layene_siyasi') }}
+                        {{ trans('cruds.rejaBeshdarboyan.fields.jimara_beshdarboyan') }}
                     </th>
                     <th>
-                        {{ trans('cruds.dengenLayenetsiyasi.fields.jimara_dengan') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.dengenLayenetsiyasi.fields.weene') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.dengenLayenetsiyasi.fields.file') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.dengenLayenetsiyasi.fields.extra_1') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.dengenLayenetsiyasi.fields.extra_2') }}
+                        {{ trans('cruds.rejaBeshdarboyan.fields.time') }}
                     </th>
                     <th>
                         &nbsp;
@@ -89,33 +77,17 @@
                         </select>
                     </td>
                     <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($westgehs as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                         <select class="search">
                             <option value>{{ trans('global.all') }}</option>
-                            @foreach($layenetsiyasis as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @foreach($times as $key => $item)
+                                <option value="{{ $item->time }}">{{ $item->time }}</option>
                             @endforeach
                         </select>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                     </td>
@@ -133,11 +105,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('dengen_layenetsiyasi_delete')
+@can('reja_beshdarboyan_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.dengen-layenetsiyasis.massDestroy') }}",
+    url: "{{ route('admin.reja-beshdarboyans.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
@@ -169,27 +141,23 @@
     serverSide: true,
     retrieve: true,
     aaSorting: [],
-    ajax: "{{ route('admin.dengen-layenetsiyasis.index') }}",
+    ajax: "{{ route('admin.reja-beshdarboyans.index') }}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'leq_name', name: 'leq.name' },
 { data: 'lijna_name', name: 'lijna.name' },
 { data: 'bingeh_name', name: 'bingeh.name' },
-{ data: 'westgeh_name', name: 'westgeh.name' },
-{ data: 'layene_siyasi_name', name: 'layene_siyasi.name' },
-{ data: 'jimara_dengan', name: 'jimara_dengan' },
-{ data: 'weene', name: 'weene', sortable: false, searchable: false },
-{ data: 'file', name: 'file', sortable: false, searchable: false },
-{ data: 'extra_1', name: 'extra_1' },
-{ data: 'extra_2', name: 'extra_2' },
+{ data: 'demjimer', name: 'demjimer' },
+{ data: 'jimara_beshdarboyan', name: 'jimara_beshdarboyan' },
+{ data: 'time_time', name: 'time.time' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
     pageLength: 50,
   };
-  let table = $('.datatable-DengenLayenetsiyasi').DataTable(dtOverrideGlobals);
+  let table = $('.datatable-RejaBeshdarboyan').DataTable(dtOverrideGlobals);
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();

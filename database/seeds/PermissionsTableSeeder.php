@@ -458,6 +458,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 113,
+                'title' => 'time_create',
+            ],
+            [
+                'id'    => 114,
+                'title' => 'time_edit',
+            ],
+            [
+                'id'    => 115,
+                'title' => 'time_show',
+            ],
+            [
+                'id'    => 116,
+                'title' => 'time_delete',
+            ],
+            [
+                'id'    => 117,
+                'title' => 'time_access',
+            ],
+            [
+                'id'    => 118,
                 'title' => 'profile_password_edit',
             ],
         ];

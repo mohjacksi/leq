@@ -10,8 +10,11 @@ use App\Models\Bingeh;
 use App\Models\Leq;
 use App\Models\Lijna;
 use App\Models\RejaBeshdarboyan;
+use App\Models\Time;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -22,7 +25,7 @@ class RejaBeshdarboyanController extends Controller
         abort_if(Gate::denies('reja_beshdarboyan_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = RejaBeshdarboyan::with(['leq', 'lijna', 'bingeh'])->select(sprintf('%s.*', (new RejaBeshdarboyan())->table));
+            $query = RejaBeshdarboyan::with(['leq', 'lijna', 'bingeh', 'time'])->select(sprintf('%s.*', (new RejaBeshdarboyan())->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -64,8 +67,11 @@ class RejaBeshdarboyanController extends Controller
             $table->editColumn('jimara_beshdarboyan', function ($row) {
                 return $row->jimara_beshdarboyan ? $row->jimara_beshdarboyan : '';
             });
+            $table->addColumn('time_time', function ($row) {
+                return $row->time ? $row->time->time : '';
+            });
 
-            $table->rawColumns(['actions', 'placeholder', 'leq', 'lijna', 'bingeh']);
+            $table->rawColumns(['actions', 'placeholder', 'leq', 'lijna', 'bingeh', 'time']);
 
             return $table->make(true);
         }
@@ -73,8 +79,9 @@ class RejaBeshdarboyanController extends Controller
         $leqs    = Leq::get();
         $lijnas  = Lijna::get();
         $bingehs = Bingeh::get();
+        $times   = Time::get();
 
-        return view('admin.rejaBeshdarboyans.index', compact('leqs', 'lijnas', 'bingehs'));
+        return view('admin.rejaBeshdarboyans.index', compact('leqs', 'lijnas', 'bingehs', 'times'));
     }
 
     public function create()
@@ -87,11 +94,16 @@ class RejaBeshdarboyanController extends Controller
 
         $bingehs = Bingeh::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.rejaBeshdarboyans.create', compact('leqs', 'lijnas', 'bingehs'));
+        $times = Time::pluck('time', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.rejaBeshdarboyans.create', compact('leqs', 'lijnas', 'bingehs', 'times'));
     }
 
     public function store(StoreRejaBeshdarboyanRequest $request)
     {
+        $validation =  RejaBeshdarboyan::where(['lijna_id' => $request->lijna_id, 'time_id' => $request->time_id])->get()->first();
+        if($validation)
+            dd('This is dublicated');
         $rejaBeshdarboyan = RejaBeshdarboyan::create($request->all());
 
         return redirect()->route('admin.reja-beshdarboyans.index');
@@ -107,9 +119,11 @@ class RejaBeshdarboyanController extends Controller
 
         $bingehs = Bingeh::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $rejaBeshdarboyan->load('leq', 'lijna', 'bingeh');
+        $times = Time::pluck('time', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.rejaBeshdarboyans.edit', compact('leqs', 'lijnas', 'bingehs', 'rejaBeshdarboyan'));
+        $rejaBeshdarboyan->load('leq', 'lijna', 'bingeh', 'time');
+
+        return view('admin.rejaBeshdarboyans.edit', compact('leqs', 'lijnas', 'bingehs', 'times', 'rejaBeshdarboyan'));
     }
 
     public function update(UpdateRejaBeshdarboyanRequest $request, RejaBeshdarboyan $rejaBeshdarboyan)
@@ -123,7 +137,7 @@ class RejaBeshdarboyanController extends Controller
     {
         abort_if(Gate::denies('reja_beshdarboyan_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $rejaBeshdarboyan->load('leq', 'lijna', 'bingeh');
+        $rejaBeshdarboyan->load('leq', 'lijna', 'bingeh', 'time');
 
         return view('admin.rejaBeshdarboyans.show', compact('rejaBeshdarboyan'));
     }

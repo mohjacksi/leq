@@ -111,6 +111,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // User Type
     Route::delete('user-types/destroy', 'UserTypeController@massDestroy')->name('user-types.massDestroy');
     Route::resource('user-types', 'UserTypeController');
+
+    // Time
+    Route::delete('times/destroy', 'TimeController@massDestroy')->name('times.massDestroy');
+    Route::resource('times', 'TimeController');
+
+    //Export Derencamen Rejabeshdarboyan
+    Route::post('derencamen-rejabeshdarboyans/export', 'DerencamenRejabeshdarboyanController@export')->name('export.rejabeshdarboyans');
+
+    
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password

@@ -55,14 +55,18 @@
                 <span class="help-block">{{ trans('cruds.rejaBeshdarboyan.fields.bingeh_helper') }}</span>
             </div>
             <div class="form-group col-md-6">
-                <label class="required" for="demjimer">{{ trans('cruds.rejaBeshdarboyan.fields.demjimer') }}</label>
-                <input class="form-control timepicker {{ $errors->has('demjimer') ? 'is-invalid' : '' }}" type="text" name="demjimer" id="demjimer" value="{{ old('demjimer') }}" required>
-                @if($errors->has('demjimer'))
+                <label class="required" for="time_id">{{ trans('cruds.rejaBeshdarboyan.fields.time') }}</label>
+                <select class="form-control select2 {{ $errors->has('time') ? 'is-invalid' : '' }}" name="time_id" id="time_id" required>
+                    @foreach($times as $id => $entry)
+                        <option value="{{ $id }}" {{ old('time_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('time'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('demjimer') }}
+                        {{ $errors->first('time') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.rejaBeshdarboyan.fields.demjimer_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.rejaBeshdarboyan.fields.time_helper') }}</span>
             </div>
             </div>
             <div class="form-row">

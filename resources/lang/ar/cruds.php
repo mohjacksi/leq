@@ -337,6 +337,9 @@ return [
             'lijna_helper'               => ' ',
             'bingeh'                     => 'بنگەه',
             'bingeh_helper'              => ' ',
+            'time'                       => 'سه عه ت',
+            'time_helper'                => ' ',
+
         ],
     ],
     'hnartn' => [
@@ -463,4 +466,21 @@ return [
             'deleted_at_helper' => ' ',
         ],
     ],
+    'time' => [
+        'title'          => 'وه خت',
+        'title_singular' => 'وه خت',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => ' ',
+            'time'              => 'سه عه ت',
+            'time_helper'       => ' ',
+            'created_at'        => 'Created at',
+            'created_at_helper' => ' ',
+            'updated_at'        => 'Updated at',
+            'updated_at_helper' => ' ',
+            'deleted_at'        => 'Deleted at',
+            'deleted_at_helper' => ' ',
+        ],
+    ],
+
 ];
