@@ -13,6 +13,7 @@ class LayanTableSeeder extends Seeder
                 'id' => 1,
                 'name'             => 'بارتي',
                 'code_siyasi'           => 'بارتي',
+                'jimara_kandida' => 0,
             ],
         ];
 
