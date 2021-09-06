@@ -10,6 +10,7 @@ class LayanTableSeeder extends Seeder
     {
         $Layan = [
             [
+                'id' => 1,
                 'name'             => 'بارتي',
                 'code_siyasi'           => 'بارتي',
             ],
