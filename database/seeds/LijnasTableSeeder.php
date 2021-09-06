@@ -3,7 +3,7 @@
 use App\Models\Lijna;
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder
+class LijnasTableSeeder extends Seeder
 {
     public function run()
     {
