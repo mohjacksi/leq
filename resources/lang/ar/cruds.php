@@ -63,6 +63,9 @@ return [
             'updated_at_helper'        => ' ',
             'deleted_at'               => 'Deleted at',
             'deleted_at_helper'        => ' ',
+            'leq'                      => 'لق',
+            'leq_helper'               => ' ',
+
             'lijna'                    => 'لیژنا ناوچێ',
             'lijna_helper'             => ' ',
             'bingeh'                   => 'بنگە‌‌‌ه',
@@ -482,5 +485,8 @@ return [
             'deleted_at_helper' => ' ',
         ],
     ],
-
+    'webSiteView' => [
+        'title'          => 'وێب سایت  Web Site View',
+        'title_singular' => 'وێب سایت  Web Site View',
+    ],
 ];

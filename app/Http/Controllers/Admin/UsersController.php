@@ -7,6 +7,7 @@ use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Bingeh;
+use App\Models\Leq;
 use App\Models\Lijna;
 use App\Models\Role;
 use App\Models\User;
@@ -23,7 +24,7 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = User::with(['roles', 'lijna', 'bingeh', 'user_type'])->select(sprintf('%s.*', (new User())->table));
+            $query = User::with(['roles', 'leq', 'lijna', 'bingeh', 'user_type'])->select(sprintf('%s.*', (new User())->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -36,12 +37,12 @@ class UsersController extends Controller
                 $crudRoutePart = 'users';
 
                 return view('partials.datatablesActions', compact(
-                'viewGate',
-                'editGate',
-                'deleteGate',
-                'crudRoutePart',
-                'row'
-            ));
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
             });
 
             $table->editColumn('id', function ($row) {
@@ -62,6 +63,10 @@ class UsersController extends Controller
 
                 return implode(' ', $labels);
             });
+            $table->addColumn('leq_name', function ($row) {
+                return $row->leq ? $row->leq->name : '';
+            });
+
             $table->addColumn('lijna_name', function ($row) {
                 return $row->lijna ? $row->lijna->name : '';
             });
@@ -74,17 +79,17 @@ class UsersController extends Controller
                 return $row->user_type ? $row->user_type->name : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'roles', 'lijna', 'bingeh', 'user_type']);
+            $table->rawColumns(['actions', 'placeholder', 'roles', 'leq', 'lijna', 'bingeh', 'user_type']);
 
             return $table->make(true);
         }
 
         $roles      = Role::get();
+        $leqs       = Leq::get();
         $lijnas     = Lijna::get();
         $bingehs    = Bingeh::get();
         $user_types = UserType::get();
-
-        return view('admin.users.index', compact('roles', 'lijnas', 'bingehs', 'user_types'));
+        return view('admin.users.index', compact('roles', 'leqs', 'lijnas', 'bingehs', 'user_types'));
     }
 
     public function create()
@@ -93,13 +98,15 @@ class UsersController extends Controller
 
         $roles = Role::pluck('title', 'id');
 
-        $lijnas = Lijna::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $leqs = Leq::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $bingehs = Bingeh::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $lijnas = Lijna::get()->prepend(trans('global.pleaseSelect'), '');
 
-        $user_types = UserType::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $bingehs = Bingeh::get()->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.users.create', compact('roles', 'lijnas', 'bingehs', 'user_types'));
+        $user_types = UserType::get()->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.users.create', compact('roles', 'leqs', 'lijnas', 'bingehs', 'user_types'));
     }
 
     public function store(StoreUserRequest $request)
@@ -116,15 +123,17 @@ class UsersController extends Controller
 
         $roles = Role::pluck('title', 'id');
 
-        $lijnas = Lijna::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $leqs = Leq::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $bingehs = Bingeh::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $lijnas = Lijna::get()->prepend(trans('global.pleaseSelect'), '');
 
-        $user_types = UserType::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $bingehs = Bingeh::get()->prepend(trans('global.pleaseSelect'), '');
 
-        $user->load('roles', 'lijna', 'bingeh', 'user_type');
+        $user_types = UserType::get()->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.users.edit', compact('roles', 'lijnas', 'bingehs', 'user_types', 'user'));
+        $user->load('roles', 'leq', 'lijna', 'bingeh', 'user_type');
+
+        return view('admin.users.edit', compact('roles', 'leqs', 'lijnas', 'bingehs', 'user_types', 'user'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
@@ -139,7 +148,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->load('roles', 'lijna', 'bingeh', 'user_type');
+        $user->load('roles', 'leq', 'lijna', 'bingeh', 'user_type');
 
         return view('admin.users.show', compact('user'));
     }

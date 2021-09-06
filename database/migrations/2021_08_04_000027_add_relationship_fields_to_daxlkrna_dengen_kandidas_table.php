@@ -13,7 +13,7 @@ class AddRelationshipFieldsToDaxlkrnaDengenKandidasTable extends Migration
             $table->foreign('leq_id', 'leq_fk_4517100')->references('id')->on('leqs');
             $table->unsignedBigInteger('lijna_id');
             $table->foreign('lijna_id', 'lijna_fk_4517101')->references('id')->on('lijnas');
-            $table->unsignedBigInteger('bingeh_id');
+            $table->unsignedBigInteger('bingeh_id')->nullable();
             $table->foreign('bingeh_id', 'bingeh_fk_4517102')->references('id')->on('bingehs');
             $table->unsignedBigInteger('westgeh_id');
             $table->foreign('westgeh_id', 'westgeh_fk_4517103')->references('id')->on('westgehs');

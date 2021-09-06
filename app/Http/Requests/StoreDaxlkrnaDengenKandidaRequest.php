@@ -29,10 +29,6 @@ class StoreDaxlkrnaDengenKandidaRequest extends FormRequest
                 'required',
                 'integer',
             ],
-            'westgeh_id' => [
-                'required',
-                'integer',
-            ],
             'layenesiyasi_id' => [
                 'required',
                 'integer',

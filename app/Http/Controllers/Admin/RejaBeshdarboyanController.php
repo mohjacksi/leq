@@ -13,6 +13,7 @@ use App\Models\RejaBeshdarboyan;
 use App\Models\Time;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,12 +39,12 @@ class RejaBeshdarboyanController extends Controller
                 $crudRoutePart = 'reja-beshdarboyans';
 
                 return view('partials.datatablesActions', compact(
-                'viewGate',
-                'editGate',
-                'deleteGate',
-                'crudRoutePart',
-                'row'
-            ));
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
             });
 
             $table->editColumn('id', function ($row) {
@@ -83,18 +84,44 @@ class RejaBeshdarboyanController extends Controller
 
         return view('admin.rejaBeshdarboyans.index', compact('leqs', 'lijnas', 'bingehs', 'times'));
     }
+    function contains($needle, $haystack)
+    {
+        return strpos($haystack, $needle) !== false;
+    }
 
     public function create()
     {
         abort_if(Gate::denies('reja_beshdarboyan_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $leqs = Leq::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $user = Auth::user();
 
-        $lijnas = Lijna::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $bingehs = Bingeh::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $user_type = $user->user_type->code;
+        $user_lijna = $user->lijna;
+        $user_bingeh = $user->bingeh;
 
         $times = Time::pluck('time', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        if ($this->contains($user_type, 'admin')) {
+            $lijnas = Lijna::get()->prepend(trans('global.pleaseSelect'), '');
+            $bingehs = Bingeh::get()->prepend(trans('global.pleaseSelect'), '');
+            $leqs = Leq::get()->prepend(trans('global.pleaseSelect'), '');
+        } elseif ($this->contains($user_type, 'leq')) {
+            $leqs = Leq::where('id', $user->leq_id)->get();
+            //
+            $lijnas = Lijna::get()->prepend(trans('global.pleaseSelect'), '');
+            $bingehs = Bingeh::get()->prepend(trans('global.pleaseSelect'), '');
+        } elseif ($this->contains($user_type, 'lijna')) {
+            $leqs = Leq::where('id', $user->leq_id)->get();
+            $lijnas = Lijna::where('id', $user->lijna_id)->get();
+            //
+            $bingehs = Bingeh::get()->prepend(trans('global.pleaseSelect'), '');
+        } elseif ($this->contains($user_type, 'bingeh')) {
+            $leqs = Leq::where('id', $user->leq_id)->get();
+            $lijnas = Lijna::where('id', $user->lijna_id)->get();
+            $bingehs = Bingeh::where('id', $user->bingeh_id)->get();
+        }
+
+
 
         return view('admin.rejaBeshdarboyans.create', compact('leqs', 'lijnas', 'bingehs', 'times'));
     }
@@ -102,7 +129,7 @@ class RejaBeshdarboyanController extends Controller
     public function store(StoreRejaBeshdarboyanRequest $request)
     {
         $validation =  RejaBeshdarboyan::where(['lijna_id' => $request->lijna_id, 'time_id' => $request->time_id])->get()->first();
-        if($validation)
+        if ($validation)
             dd('This is dublicated');
         $rejaBeshdarboyan = RejaBeshdarboyan::create($request->all());
 
@@ -113,15 +140,34 @@ class RejaBeshdarboyanController extends Controller
     {
         abort_if(Gate::denies('reja_beshdarboyan_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $leqs = Leq::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $user = Auth::user();
 
-        $lijnas = Lijna::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $bingehs = Bingeh::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $user_type = $user->user_type->code;
+        $user_lijna = $user->lijna;
+        $user_bingeh = $user->bingeh;
 
         $times = Time::pluck('time', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $rejaBeshdarboyan->load('leq', 'lijna', 'bingeh', 'time');
+        if ($this->contains($user_type, 'admin')) {
+            $lijnas = Lijna::get()->prepend(trans('global.pleaseSelect'), '');
+            $bingehs = Bingeh::get()->prepend(trans('global.pleaseSelect'), '');
+            $leqs = Leq::get()->prepend(trans('global.pleaseSelect'), '');
+        } elseif ($this->contains($user_type, 'leq')) {
+            $leqs = Leq::where('id', $user->leq_id)->get();
+            //
+            $lijnas = Lijna::get()->prepend(trans('global.pleaseSelect'), '');
+            $bingehs = Bingeh::get()->prepend(trans('global.pleaseSelect'), '');
+        } elseif ($this->contains($user_type, 'lijna')) {
+            $leqs = Leq::where('id', $user->leq_id)->get();
+            $lijnas = Lijna::where('id', $user->lijna_id)->get();
+            //
+            $bingehs = Bingeh::get()->prepend(trans('global.pleaseSelect'), '');
+        } elseif ($this->contains($user_type, 'bingeh')) {
+            $leqs = Leq::where('id', $user->leq_id)->get();
+            $lijnas = Lijna::where('id', $user->lijna_id)->get();
+            $bingehs = Bingeh::where('id', $user->bingeh_id)->get();
+        }
+
 
         return view('admin.rejaBeshdarboyans.edit', compact('leqs', 'lijnas', 'bingehs', 'times', 'rejaBeshdarboyan'));
     }

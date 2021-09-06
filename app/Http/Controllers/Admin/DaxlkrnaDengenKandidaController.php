@@ -16,6 +16,7 @@ use App\Models\Lijna;
 use App\Models\Westgeh;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
@@ -42,12 +43,12 @@ class DaxlkrnaDengenKandidaController extends Controller
                 $crudRoutePart = 'daxlkrna-dengen-kandidas';
 
                 return view('partials.datatablesActions', compact(
-                'viewGate',
-                'editGate',
-                'deleteGate',
-                'crudRoutePart',
-                'row'
-            ));
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
             });
 
             $table->editColumn('id', function ($row) {
@@ -129,22 +130,49 @@ class DaxlkrnaDengenKandidaController extends Controller
 
         return view('admin.daxlkrnaDengenKandidas.index', compact('leqs', 'lijnas', 'bingehs', 'westgehs', 'layenetsiyasis', 'kandids'));
     }
-
+    function contains($needle, $haystack)
+    {
+        return strpos($haystack, $needle) !== false;
+    }
     public function create()
     {
         abort_if(Gate::denies('daxlkrna_dengen_kandida_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $leqs = Leq::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $westgehs = Westgeh::pluck('name', 'id')->prepend('هەمی وێستگەهێن بنگەهی');
 
-        $lijnas = Lijna::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $layenesiyasis = Layenetsiyasi::get()->prepend(trans('global.pleaseSelect'), '');
 
-        $bingehs = Bingeh::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $jimara_kandidis = Kandid::get()->prepend(trans('global.pleaseSelect'), '');
 
-        $westgehs = Westgeh::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $user = Auth::user();
 
-        $layenesiyasis = Layenetsiyasi::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $user_type = $user->user_type->code;
+        $user_lijna = $user->lijna;
+        $user_bingeh = $user->bingeh;
 
-        $jimara_kandidis = Kandid::pluck('jimara_kandidi', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        if ($this->contains($user_type, 'admin')) {
+            $lijnas = Lijna::get()->prepend(trans('global.pleaseSelect'), '');
+            $bingehs = Bingeh::get()->prepend(trans('global.pleaseSelect'), '');
+            $leqs = Leq::get()->prepend(trans('global.pleaseSelect'), '');
+        } elseif ($this->contains($user_type, 'leq')) {
+            $leqs = Leq::where('id', $user->leq_id)->get();
+            //
+            $lijnas = Lijna::get()->prepend(trans('global.pleaseSelect'), '');
+            $bingehs = Bingeh::get()->prepend(trans('global.pleaseSelect'), '');
+        } elseif ($this->contains($user_type, 'lijna')) {
+            $leqs = Leq::where('id', $user->leq_id)->get();
+            $lijnas = Lijna::where('id', $user->lijna_id)->get();
+            //
+            $bingehs = Bingeh::get()->prepend(trans('global.pleaseSelect'), '');
+        } elseif ($this->contains($user_type, 'bingeh')) {
+            $leqs = Leq::where('id', $user->leq_id)->get();
+            $lijnas = Lijna::where('id', $user->lijna_id)->get();
+            $bingehs = Bingeh::where('id', $user->bingeh_id)->get();
+        }
+
+
+
 
         return view('admin.daxlkrnaDengenKandidas.create', compact('leqs', 'lijnas', 'bingehs', 'westgehs', 'layenesiyasis', 'jimara_kandidis'));
     }
@@ -172,19 +200,39 @@ class DaxlkrnaDengenKandidaController extends Controller
     {
         abort_if(Gate::denies('daxlkrna_dengen_kandida_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $leqs = Leq::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $westgehs = Westgeh::pluck('name', 'id')->prepend('هەمی وێستگەهێن بنگەهی');
 
-        $lijnas = Lijna::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $layenesiyasis = Layenetsiyasi::get()->prepend(trans('global.pleaseSelect'), '');
 
-        $bingehs = Bingeh::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $jimara_kandidis = Kandid::get()->prepend(trans('global.pleaseSelect'), '');
 
-        $westgehs = Westgeh::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $user = Auth::user();
 
-        $layenesiyasis = Layenetsiyasi::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $user_type = $user->user_type->code;
+        $user_lijna = $user->lijna;
+        $user_bingeh = $user->bingeh;
 
-        $jimara_kandidis = Kandid::pluck('jimara_kandidi', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $daxlkrnaDengenKandida->load('leq', 'lijna', 'bingeh', 'westgeh', 'layenesiyasi', 'jimara_kandidi');
+        if ($this->contains($user_type, 'admin')) {
+            $lijnas = Lijna::get()->prepend(trans('global.pleaseSelect'), '');
+            $bingehs = Bingeh::get()->prepend(trans('global.pleaseSelect'), '');
+            $leqs = Leq::get()->prepend(trans('global.pleaseSelect'), '');
+        } elseif ($this->contains($user_type, 'leq')) {
+            $leqs = Leq::where('id', $user->leq_id)->get();
+            //
+            $lijnas = Lijna::get()->prepend(trans('global.pleaseSelect'), '');
+            $bingehs = Bingeh::get()->prepend(trans('global.pleaseSelect'), '');
+        } elseif ($this->contains($user_type, 'lijna')) {
+            $leqs = Leq::where('id', $user->leq_id)->get();
+            $lijnas = Lijna::where('id', $user->lijna_id)->get();
+            //
+            $bingehs = Bingeh::get()->prepend(trans('global.pleaseSelect'), '');
+        } elseif ($this->contains($user_type, 'bingeh')) {
+            $leqs = Leq::where('id', $user->leq_id)->get();
+            $lijnas = Lijna::where('id', $user->lijna_id)->get();
+            $bingehs = Bingeh::where('id', $user->bingeh_id)->get();
+        }
+
 
         return view('admin.daxlkrnaDengenKandidas.edit', compact('leqs', 'lijnas', 'bingehs', 'westgehs', 'layenesiyasis', 'jimara_kandidis', 'daxlkrnaDengenKandida'));
     }

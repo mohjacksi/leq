@@ -478,6 +478,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 118,
+                'title' => 'web_site_view_create',
+            ],
+            [
+                'id'    => 119,
+                'title' => 'web_site_view_edit',
+            ],
+            [
+                'id'    => 120,
+                'title' => 'web_site_view_show',
+            ],
+            [
+                'id'    => 121,
+                'title' => 'web_site_view_delete',
+            ],
+            [
+                'id'    => 122,
+                'title' => 'web_site_view_access',
+            ],
+            [
+                'id'    => 123,
                 'title' => 'profile_password_edit',
             ],
         ];

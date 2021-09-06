@@ -118,8 +118,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     //Export Derencamen Rejabeshdarboyan
     Route::post('derencamen-rejabeshdarboyans/export', 'DerencamenRejabeshdarboyanController@export')->name('export.rejabeshdarboyans');
-
-    
+    // Web Site View
+    Route::delete('web-site-views/destroy', 'WebSiteViewController@massDestroy')->name('web-site-views.massDestroy');
+    Route::resource('web-site-views', 'WebSiteViewController');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password

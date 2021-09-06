@@ -10,7 +10,7 @@ class CreateRejaBeshdarboyansTable extends Migration
     {
         Schema::create('reja_beshdarboyans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->time('demjimer');
+            $table->time('demjimer')->nullable();
             $table->integer('jimara_beshdarboyan');
             $table->timestamps();
             $table->softDeletes();
