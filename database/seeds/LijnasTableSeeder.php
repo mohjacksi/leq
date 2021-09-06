@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Models\Lijna;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -54,6 +54,6 @@ class UsersTableSeeder extends Seeder
             ],
         ];
 
-        User::insert($users);
+        Lijna::insert($lijnas);
     }
 }
