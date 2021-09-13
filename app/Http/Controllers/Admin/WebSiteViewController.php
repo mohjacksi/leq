@@ -7,6 +7,7 @@ use App\Http\Requests\MassDestroyWebSiteViewRequest;
 use App\Http\Requests\StoreWebSiteViewRequest;
 use App\Http\Requests\UpdateWebSiteViewRequest;
 use App\Models\DaxlkrnaDengenKandida;
+use App\Models\Lijna;
 use Gate;
 use Illuminate\Http\Request;
 use DB;
@@ -17,6 +18,14 @@ class WebSiteViewController extends Controller
     public function index()
     {
         abort_if(Gate::denies('web_site_view_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+
+        $all_total = Lijna::sum('jimara_dengderan');
+        $votes_total = DaxlkrnaDengenKandida::sum('jimara_dengan');
+        $total_percent = round($votes_total / $all_total * 100, 2);
+
+
+
 
         $total_voats = DaxlkrnaDengenKandida::sum('jimara_dengan');
         $total_each_party = DaxlkrnaDengenKandida::with(['layenesiyasi', 'media'])->groupBy('layenesiyasi_id')
@@ -43,7 +52,15 @@ class WebSiteViewController extends Controller
             ];
             //round(($total_candidate_best['total'] / $total_candidates) * 100, 2)
         }
+
+
+        //
+
+
         return view('admin.webSiteViews.index')->with([
+            'all_total' => $all_total,
+            'votes_total' => $votes_total,
+            'total_percent' => $total_percent,
             'total_voats' => $total_voats,
             'total_each_party' => $total_each_party,
             'total_parties' => $total_parties,

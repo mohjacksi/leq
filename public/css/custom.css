@@ -1,37 +1,36 @@
-
 .text-info {
-    color: #7b72c9!important;
+    color: #7b72c9 !important;
 }
 body.c-app.vsc-initialized {
-    background-color: #f0f0e5!important;
+    background-color: #f0f0e5 !important;
 }
 @font-face {
     font-family: rudawregular2;
-    src: url('/rudawregular2.ttf');
+    src: url("/rudawregular2.ttf");
 }
 .c-sidebar {
     background: #494663;
 }
-.c-sidebar-nav-dropdown-toggle{
-    background: #494663!important;
+.c-sidebar-nav-dropdown-toggle {
+    background: #494663 !important;
 }
-.c-sidebar .c-sidebar-nav-link:hover{
+.c-sidebar .c-sidebar-nav-link:hover {
     background-color: #666292;
 }
-.c-sidebar .c-sidebar-nav-dropdown-toggle:hover{
+.c-sidebar .c-sidebar-nav-dropdown-toggle:hover {
     background-color: #7b72c9;
 }
 
-.c-sidebar .c-active.c-sidebar-nav-dropdown-toggle, .c-sidebar .c-sidebar-nav-link.c-active{
+.c-sidebar .c-active.c-sidebar-nav-dropdown-toggle,
+.c-sidebar .c-sidebar-nav-link.c-active {
     background-color: #6c4977;
     font-weight: bold;
 }
 .c-sidebar .c-sidebar-nav-link.c-active {
-    background-color: #7b72c9!important;
+    background-color: #7b72c9 !important;
     font-weight: bold;
-    color:rgb(255, 255, 255);
-    text-decoration: underline!important;
-
+    color: rgb(255, 255, 255);
+    text-decoration: underline !important;
 }
 .btn-primary {
     color: #fff;
@@ -62,7 +61,7 @@ div.dataTables_wrapper div.dataTables_length select {
 .page-link {
     position: relative;
     display: block;
-    padding: .5rem .75rem;
+    padding: 0.5rem 0.75rem;
     line-height: 1.25;
     border: 1px solid;
     color: #464703;
@@ -81,8 +80,8 @@ div,
 button,
 th,
 td,
-label{
-    font-family: 'rudawregular2', cursive;
+label {
+    font-family: "rudawregular2", cursive;
 }
 
 .ck-editor__editable,
@@ -101,16 +100,16 @@ table.dataTable tbody th.select-checkbox::after {
     top: 50%;
 }
 
-.dataTables_length,
+/* .dataTables_length,
 .dataTables_filter,
 .dt-buttons {
     margin-bottom: 0.333em;
     margin-top: .2rem;
     display: none;
-}
+} */
 
 .dataTables_filter {
-    margin-right: .2rem;
+    margin-right: 0.2rem;
 }
 
 .dt-buttons .btn {
@@ -167,7 +166,7 @@ table.dataTable thead .sorting_desc {
 
 .btn-default.focus,
 .btn-default:focus {
-    box-shadow: 0 0 0 .2rem rgba(209, 213, 215, .5);
+    box-shadow: 0 0 0 0.2rem rgba(209, 213, 215, 0.5);
 }
 
 .btn-default:hover {
@@ -188,12 +187,12 @@ table.dataTable thead .sorting_desc {
     font-weight: bold;
 }
 .searchable-fields {
-    padding-left:5px;
+    padding-left: 5px;
 }
 .searchable-link {
-    padding:0 5px 0 5px;
+    padding: 0 5px 0 5px;
 }
-.searchable-link:hover   {
+.searchable-link:hover {
     cursor: pointer;
     background: #eaeaea;
 }

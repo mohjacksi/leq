@@ -22,34 +22,43 @@ class DerencamenRejabeshdarboyanController extends Controller
         $times = Time::orderBy('id')->get();
         $lijnas = Lijna::all();
         $data = [];
-        $collection = RejaBeshdarboyan::select('lijna_id','time_id','jimara_beshdarboyan')
-            
+        $collection = RejaBeshdarboyan::select('lijna_id', 'time_id', 'jimara_beshdarboyan')
             ->orderBy('time_id')
             ->get();
-        
-        
-        // foreach($collection as $item){
-        //     $data[$item->time_id][$item->lijna_id] = $item->jimara_beshdarboyan;            
-        // }
         $data = $collection;
-        return view('admin.derencamenRejabeshdarboyans.index',compact('lijnas','times','data'));
 
+        //dd($lijnas);
+        $all_total = Lijna::sum('jimara_dengderan');
+        $went_total = RejaBeshdarboyan::sum('jimara_beshdarboyan');
+
+
+        $unwent_total = $all_total - $went_total;
+        $went_total_percent = $went_total / $all_total * 100;
+        $unwent_total_percent = $unwent_total / $all_total * 100;
+
+
+        return view('admin.derencamenRejabeshdarboyans.index', compact(
+            'lijnas',
+            'times',
+            'data',
+            'went_total_percent',
+            'unwent_total_percent'
+        ));
     }
     public function export()
     {
         $times = Time::orderBy('id')->get();
         $lijnas = Lijna::all();
         $data = [];
-        $collection = RejaBeshdarboyan::select('lijna_id','time_id','jimara_beshdarboyan')
-            
+        $collection = RejaBeshdarboyan::select('lijna_id', 'time_id', 'jimara_beshdarboyan')
+
             ->orderBy('time_id')
             ->get();
-        
-        
+
+
         $data = $collection;
         //return view('admin.derencamenRejabeshdarboyans.index',compact('lijnas','times','data'));
         return Excel::download(new RejaBeshdarboyanExport($data, $times, $lijnas), 'derencamen-rejabeshdarboyans.xlsx');
-
     }
 
     // public function index()
