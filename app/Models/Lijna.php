@@ -30,6 +30,17 @@ class Lijna extends Model
         'deleted_at',
     ];
 
+
+    public function numberOfBengasBelongToLjna()
+    {
+        return DaxlkrnaDengenKandida::query()
+            ->select('bingeh_id')
+            ->where('lijna_id', $this->id)
+            ->groupBy('bingeh_id')
+            ->get()
+            ->count();
+    }
+
     public function lijnaRekxraws()
     {
         return $this->hasMany(Rekxraw::class, 'lijna_id', 'id');

@@ -5,7 +5,15 @@
         <div class="card-header">
             {{ trans('cruds.webSiteView.title') }}
         </div>
+        <div class="card-body text-info">
+            <form id="export" method="get" action="{{ route('admin.export.dengenkandida') }}">
+                @csrf
+                <button style="width: 250px;" class="btn btn-primary" form="export" type="submit">
+                    تصدير
+                </button>
 
+            </form>
+        </div>
         <div class="card-body">
             <div class="form-row">
                 <div class="form-group col-md-12 text-center">
@@ -24,7 +32,7 @@
                     </h3>
                     <div>
                         @php
-                            $arry_for_chart = [['','']];
+                            $arry_for_chart = [['', '']];
                             foreach ($total_each_party as $id => $total_party) {
                                 $name = $total_party->layenesiyasi->name;
                                 $percent = round(($total_party->total / $total_parties) * 100, 2);

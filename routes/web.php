@@ -118,6 +118,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     //Export Derencamen Rejabeshdarboyan
     Route::post('derencamen-rejabeshdarboyans/export', 'DerencamenRejabeshdarboyanController@export')->name('export.rejabeshdarboyans');
+
+    //Export Dengen Kandida
+    Route::get('dengen-kandida/export', 'WebSiteViewController@export')->name('export.dengenkandida');
+
     // Web Site View
     Route::delete('web-site-views/destroy', 'WebSiteViewController@massDestroy')->name('web-site-views.massDestroy');
     Route::resource('web-site-views', 'WebSiteViewController');

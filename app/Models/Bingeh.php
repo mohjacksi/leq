@@ -32,6 +32,9 @@ class Bingeh extends Model
         'deleted_at',
     ];
 
+
+
+
     public function bingehHnartnaDengans()
     {
         return $this->hasMany(HnartnaDengan::class, 'bingeh_id', 'id');

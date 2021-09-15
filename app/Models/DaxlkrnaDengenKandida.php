@@ -19,6 +19,10 @@ class DaxlkrnaDengenKandida extends Model implements HasMedia
     protected $appends = [
         'weene',
         'file',
+        'layan',
+        'kandid',
+        'ljna',
+        'bngeh'
     ];
 
     protected $dates = [
@@ -46,6 +50,28 @@ class DaxlkrnaDengenKandida extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
+    }
+
+
+    public function getBngehAttribute()
+    {
+        return  $this->bingeh->name ?? '';
+    }
+
+    public function getLjnaAttribute()
+    {
+        return  $this->lijna->name ?? '';
+    }
+
+
+    public function getLayanAttribute()
+    {
+        return  $this->layenesiyasi->name ?? '';
+    }
+
+    public function getKandidAttribute()
+    {
+        return  $this->jimara_kandidi->nav;
     }
 
     public function leq()

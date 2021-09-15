@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="8a2MlPhOV5oMIQUQeESScv1NRoFJ7Je6oyFy5xWA">
+
+    <title>لقێ PDK</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet" />
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+        rel="stylesheet" />
+    <link href="https://unpkg.com/@coreui/coreui@3.2/dist/css/coreui.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/css/perfect-scrollbar.min.css"
+        rel="stylesheet" />
+    <link href="http://127.0.0.1:8000/css/custom.css" rel="stylesheet" />
+
+    </head>
+
+<body class="c-app">
+    <div id="sidebar" class="c-sidebar c-sidebar-fixed c-sidebar-lg-show">
+
+    <div class="c-sidebar-brand d-md-down-none">
+        <a class="c-sidebar-brand-full h4" href="#">
+            لقێ PDK
+        </a>
+    </div>
+
+    <ul class="c-sidebar-nav">
+        <li class="c-sidebar-nav-item">
+            <a href="http://127.0.0.1:8000/admin" class="c-sidebar-nav-link">
+                <i class="c-sidebar-nav-icon fas fa-fw fa-clipboard"></i>
+                تێبینییەکان
+            </a>
+        </li>
+                    <li
+                class="c-sidebar-nav-dropdown     ">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw far fa-user-circle c-sidebar-nav-icon">
+
+                    </i>
+                    بەکارهێنەران
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                                                                                    <li class="c-sidebar-nav-item">
+                            <a href="http://127.0.0.1:8000/admin/users"
+                                class="c-sidebar-nav-link ">
+                                <i class="fa-fw fas fa-user c-sidebar-nav-icon">
+
+                                </i>
+                                بەکارهێنەران
+                            </a>
+                        </li>
+                                                                            </ul>
+            </li>
+                            <li
+                class="c-sidebar-nav-dropdown       ">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw fas fa-sitemap c-sidebar-nav-icon">
+
+                    </i>
+                    داگرتنا پێزانینا
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                                            <li class="c-sidebar-nav-item">
+                            <a href="http://127.0.0.1:8000/admin/layenetsiyasis"
+                                class="c-sidebar-nav-link ">
+                                <i class="fa-fw fab fa-font-awesome-flag c-sidebar-nav-icon">
+
+                                </i>
+                                لایەنێت سیاسی
+                            </a>
+                        </li>
+                                                                <li class="c-sidebar-nav-item">
+                            <a href="http://127.0.0.1:8000/admin/leqs"
+                                class="c-sidebar-nav-link ">
+                                <i class="fa-fw fas fa-archway c-sidebar-nav-icon">
+
+                                </i>
+                                لق
+                            </a>
+                        </li>
+                                                                <li class="c-sidebar-nav-item">
+                            <a href="http://127.0.0.1:8000/admin/lijnas"
+                                class="c-sidebar-nav-link ">
+                                <i class="fa-fw fas fa-building c-sidebar-nav-icon">
+
+                                </i>
+                                لیژنا ناوچێ
+                            </a>
+                        </li>
+                                                                <li class="c-sidebar-nav-item">
+                            <a href="http://127.0.0.1:8000/admin/rekxraws"
+                                class="c-sidebar-nav-link ">
+                                <i class="fa-fw fas fa-calendar c-sidebar-nav-icon">
+
+                                </i>
+                                رێکخراو
+                            </a>
+                        </li>
+                                                                <li class="c-sidebar-nav-item">
+                            <a href="http://127.0.0.1:8000/admin/bingehs"
+                                class="c-sidebar-nav-link ">
+                                <i class="fa-fw fas fa-school c-sidebar-nav-icon">
+
+                                </i>
+                                بنگە‌‌‌ه
+                            </a>
+                        </li>
+                                                                <li class="c-sidebar-nav-item">
+                            <a href="http://127.0.0.1:8000/admin/westgehs"
+                                class="c-sidebar-nav-link ">
+                                <i class="fa-fw fas fa-box-open c-sidebar-nav-icon">
+
+                                </i>
+                                وێستگە
+                            </a>
+                        </li>
+                                                                <li class="c-sidebar-nav-item">
+                            <a href="http://127.0.0.1:8000/admin/kandids"
+                                class="c-sidebar-nav-link ">
+                                <i class="fa-fw fas fa-user-check c-sidebar-nav-icon">
+
+                                </i>
+                                کاندید
+                            </a>
+                        </li>
+                                                                <li class="c-sidebar-nav-item">
+                            <a href="http://127.0.0.1:8000/admin/times"
+                                class="c-sidebar-nav-link ">
+                                <i class="fa-fw far fa-clock c-sidebar-nav-icon">
+
+                                </i>
+                                وه خت
+                            </a>
+                        </li>
+                                    </ul>
+            </li>
+                            <li
+                class="c-sidebar-nav-dropdown  ">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw fas fa-archive c-sidebar-nav-icon">
+
+                    </i>
+                    داخلکرنا دەنگان
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                                                                <li class="c-sidebar-nav-item">
+                            <a href="http://127.0.0.1:8000/admin/daxlkrna-dengen-kandidas"
+                                class="c-sidebar-nav-link ">
+                                <i class="fa-fw fas fa-user-plus c-sidebar-nav-icon">
+
+                                </i>
+                                داخلکرنا دەنگێن کاندیدا
+                            </a>
+                        </li>
+                                    </ul>
+            </li>
+                            <li class="c-sidebar-nav-dropdown ">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw fas fa-walking c-sidebar-nav-icon">
+
+                    </i>
+                    داخلکرنا رێژا بەژداربویان
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                                            <li class="c-sidebar-nav-item">
+                            <a href="http://127.0.0.1:8000/admin/reja-beshdarboyans"
+                                class="c-sidebar-nav-link ">
+                                <i class="fa-fw fas fa-walking c-sidebar-nav-icon">
+
+                                </i>
+                                بنگەه
+                            </a>
+                        </li>
+                                    </ul>
+            </li>
+                            <li
+                class="c-sidebar-nav-dropdown  ">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw fas fa-share-square c-sidebar-nav-icon">
+
+                    </i>
+                    هنارتن
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                                            <li class="c-sidebar-nav-item">
+                            <a href="http://127.0.0.1:8000/admin/hnartna-dengans"
+                                class="c-sidebar-nav-link ">
+                                <i class="fa-fw fas fa-share-square c-sidebar-nav-icon">
+
+                                </i>
+                                هنارتنا دەنگان
+                            </a>
+                        </li>
+                                                                <li class="c-sidebar-nav-item">
+                            <a href="http://127.0.0.1:8000/admin/hnartna-reja-beshdarboyans"
+                                class="c-sidebar-nav-link ">
+                                <i class="fa-fw far fa-share-square c-sidebar-nav-icon">
+
+                                </i>
+                                هنارتنا رێژا بەشداربویان
+                            </a>
+                        </li>
+                                    </ul>
+            </li>
+                                                            <li class="c-sidebar-nav-item">
+                <a href="http://127.0.0.1:8000/admin/derencamen-rejabeshdarboyans"
+                    class="c-sidebar-nav-link ">
+                    <i class="fa-fw fas fa-walking c-sidebar-nav-icon">
+
+                    </i>
+                    دەرئەنجامێن رێژا بەشداربویان
+                </a>
+            </li>
+                            <li class="c-sidebar-nav-item">
+                <a href="http://127.0.0.1:8000/admin/web-site-views"
+                    class="c-sidebar-nav-link ">
+                    <i class="fa-fw fas fa-sitemap c-sidebar-nav-icon">
+
+                    </i>
+                    وێب سایت  Web Site View
+                </a>
+            </li>
+                                            <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link "
+                        href="http://127.0.0.1:8000/profile/password">
+                        <i class="fa-fw fas fa-key c-sidebar-nav-icon">
+                        </i>
+                        تغيير كلمة المرور
+                    </a>
+                </li>
+                            <li class="c-sidebar-nav-item">
+            <a href="#" class="c-sidebar-nav-link"
+                onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+                <i class="c-sidebar-nav-icon fas fa-fw fa-sign-out-alt">
+
+                </i>
+                تسجيل خروج
+            </a>
+        </li>
+    </ul>
+
+</div>
+    <div class="c-wrapper">
+        <header class="c-header c-header-fixed px-3">
+            <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar"
+                data-class="c-sidebar-show">
+                <i class="fas fa-fw fa-bars"></i>
+            </button>
+
+            <a class="c-header-brand d-lg-none" href="#">لقێ PDK</a>
+
+            <button class="c-header-toggler mfs-3 d-md-down-none" type="button" responsive="true">
+                <i class="fas fa-fw fa-bars"></i>
+            </button>
+
+            <ul class="c-header-nav ml-auto">
+                
+
+            </ul>
+        </header>
+
+        <div class="c-body">
+            <main class="c-main">
+
+
+                <div class="container-fluid">
+                                                            
+    <div class="card border-primary">
+        <div class="card-header">
+            دەرئەنجامێن رێژا بەشداربویان
+        </div>
+        <div class="card-body text-info">
+            <form id="export" method="post" action="http://127.0.0.1:8000/admin/derencamen-rejabeshdarboyans/export">
+                <input type="hidden" name="_token" value="8a2MlPhOV5oMIQUQeESScv1NRoFJ7Je6oyFy5xWA">                <button style="width: 250px;" class="btn btn-primary" form="export" type="submit">
+                    تصدير
+                </button>
+
+            </form>
+        </div>
+
+        <div class="card-body text-info table-responsive">
+
+            
+            <table class='table table-bordered'>
+                <thead>
+                    <tr>
+                        <th rowspan='2'>
+                            بنگه‌هـ
+                        </th>
+                        <th rowspan='2'>
+                            لیژنه‌
+                        </th>
+
+                        <th rowspan='2'>
+                            سه‌رجه‌م
+                        </th>
+                        <th rowspan='2'>
+                            بةشداربون
+                        </th>
+                        <th rowspan='2'>
+                            پوچه‌ل
+                        </th>
+                        <th rowspan='2'>
+                            دنكی درست
+                        </th>
+
+
+
+                                                    <th colspan="2">
+                                بارتي
+                                                                                                                                                                                                    </th>
+                                                    <th colspan="1">
+                                یەکگرتوو
+                                                                                                                                </th>
+                                                    <th colspan="2">
+                                یەکێتی
+                                                                                                                                                                                                    </th>
+                                                    <th colspan="1">
+                                xx
+                                                                                                                                </th>
+                        
+                        <tr><th>Quae nisi facilis om</th><th>Quisquam eos dolore</th><th>Nostrum voluptas vol</th><th>علي</th><th>احمد</th><th>xxx</th></tr>                </thead>
+
+
+
+                                                    <tr>
+                                                <td>
+                            Beck Maynard
+                        </td>
+
+                                                                                <td rowspan="2">
+                                خابور
+                            </td>
+
+                        
+                        <td>
+                            61
+                        </td>
+
+                        <td>171</td>
+                        <td>0
+                        </td>
+                        <td>171</td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                71
+                            </td>
+                                                    <td>
+                                100
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                            </tr>
+                                    <tr>
+                                                <td>
+                            بنگەه
+                        </td>
+
+                        
+                        <td>
+                            6
+                        </td>
+
+                        <td>25</td>
+                        <td>0
+                        </td>
+                        <td>25</td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                10
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                15
+                            </td>
+                                            </tr>
+                                    <tr>
+                                                <td>
+                            Rose Estes
+                        </td>
+
+                                                                                <td rowspan="2">
+                                سةرهلدان
+                            </td>
+
+                        
+                        <td>
+                            89
+                        </td>
+
+                        <td>39</td>
+                        <td>39
+                        </td>
+                        <td>0</td>
+                                                    <td>
+                                39
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                            </tr>
+                                    <tr>
+                                                <td>
+                            Cadman Aguirre
+                        </td>
+
+                        
+                        <td>
+                            49
+                        </td>
+
+                        <td>100</td>
+                        <td>0
+                        </td>
+                        <td>100</td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                100
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                            </tr>
+                                    <tr>
+                                                <td>
+                            بنگە‌‌‌ه یەکێتی
+                        </td>
+
+                                                                                <td rowspan="1">
+                                یەکێتی
+                            </td>
+
+                        
+                        <td>
+                            
+                        </td>
+
+                        <td>50</td>
+                        <td>0
+                        </td>
+                        <td>50</td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                                    <td>
+                                50
+                            </td>
+                                                    <td>
+                                0
+                            </td>
+                                            </tr>
+                
+                                <tr><td colspan="6"></td><td>39</td><td>10</td><td>71</td><td>200</td><td>50</td><td>15</td></tr><tr><td colspan="6"></td><td>Quae nisi facilis om</td><td>Quisquam eos dolore</td><td>Nostrum voluptas vol</td><td>علي</td><td>احمد</td><td>xxx</td></tr>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+                </div>
+
+
+            </main>
+            <form id="logoutform" action="http://127.0.0.1:8000/logout" method="POST" style="display: none;">
+                <input type="hidden" name="_token" value="8a2MlPhOV5oMIQUQeESScv1NRoFJ7Je6oyFy5xWA">
+            </form>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
+    <script src="https://unpkg.com/@coreui/coreui@3.2/dist/js/coreui.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+    <script src="http://127.0.0.1:8000/js/main.js"></script>
+    <script>
+        $(function() {
+            let copyButtonTrans = 'نسخ'
+            let csvButtonTrans = 'CSV'
+            let excelButtonTrans = 'Excel'
+            let pdfButtonTrans = 'PDF'
+            let printButtonTrans = 'طباعة'
+            let colvisButtonTrans = 'الاعمدة'
+            let selectAllButtonTrans = 'دەستنیشانکردنا هەميا'
+            let selectNoneButtonTrans = 'نه دەستنیشانکردنا هەميا'
+
+            let languages = {
+                'ar': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Arabic.json'
+            };
+
+            $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, {
+                className: 'btn'
+            })
+            $.extend(true, $.fn.dataTable.defaults, {
+                language: {
+                    url: languages['ar']
+                },
+                columnDefs: [{
+                    orderable: false,
+                    className: 'select-checkbox',
+                    targets: 0
+                }, {
+                    orderable: false,
+                    searchable: false,
+                    targets: -1
+                }],
+                select: {
+                    style: 'multi+shift',
+                    selector: 'td:first-child'
+                },
+                order: [],
+                scrollX: true,
+                pageLength: 100,
+                dom: 'lBfrtip<"actions">',
+                buttons: [{
+                        extend: 'selectAll',
+                        className: 'btn-primary',
+                        text: selectAllButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        },
+                        action: function(e, dt) {
+                            e.preventDefault()
+                            dt.rows().deselect();
+                            dt.rows({
+                                search: 'applied'
+                            }).select();
+                        }
+                    },
+                    {
+                        extend: 'selectNone',
+                        className: 'btn-primary',
+                        text: selectNoneButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'copy',
+                        className: 'btn-default',
+                        text: copyButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        className: 'btn-default',
+                        text: csvButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn-default',
+                        text: excelButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        className: 'btn-default',
+                        text: pdfButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn-default',
+                        text: printButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'colvis',
+                        className: 'btn-default',
+                        text: colvisButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    }
+                ]
+            });
+
+            $.fn.dataTable.ext.classes.sPageButton = '';
+        });
+    </script>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-chained/1.0.1/jquery.chained.min.js">
+    </script>
+        
+
+    </body>
+
+</html>
