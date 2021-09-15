@@ -172,12 +172,14 @@
         @endif
         <div class="form-group col-md-4 border border-primary">
             <div class="text-center">
+
                 @if (isset($total_candidate->jimara_kandidi->wene))
-                    <a class="text-center"
-                        href="{{ $total_candidate->jimara_kandidi->wene->first()->getUrl() ?? '' }}" target="_blank">
-                        <img class="img-fluid"
-                            src="{{ $total_candidate->jimara_kandidi->wene->first()->getUrl() ?? '' }}">
-                    </a>
+                    <div class="text-center">
+                        <a class="text-center" href="{{ $total_candidate->jimara_kandidi->wene->getUrl() }}"
+                            target="_blank">
+                            <img class="img-fluid" src="{{ $total_candidate->jimara_kandidi->wene->getUrl() }}">
+                        </a>
+                    </div>
                 @endif
             </div>
 
